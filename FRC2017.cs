@@ -18,9 +18,8 @@ namespace FRC2017
         string autoSelected;
         SendableChooser chooser;
 
-        //create joystick and robotdrive objects for joystick input and motor control
-        Joystick stick = new Joystick(0);
-        RobotDrive drive = new RobotDrive(0, 0);
+        
+        
         
         
         
@@ -34,6 +33,10 @@ namespace FRC2017
             chooser.AddDefault("Default Auto", defaultAuto);
             chooser.AddObject("My Auto", customAuto);
             SmartDashboard.PutData("Chooser", chooser);
+            
+            //create joystick and robotdrive objects for joystick input and motor control
+            Joystick stick = new Joystick(0);
+            RobotDrive drive = new RobotDrive(0, 0);
         }
 
         // This autonomous (along with the sendable chooser above) shows how to select between
