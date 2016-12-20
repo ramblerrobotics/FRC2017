@@ -39,12 +39,12 @@
     <StartupObject>FRC2017.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HAL, Version=2016.0.0.259, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FRC.WPILib.Extras.2016.0.0.259\lib\net45\HAL.dll</HintPath>
+    <Reference Include="HAL, Version=2016.0.2.45, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\FRC.WPILib.Extras.2016.0.2.45\lib\net45\HAL.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NetworkTables, Version=2016.0.0.148, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FRC.NetworkTables.2016.0.0.148\lib\net45\NetworkTables.dll</HintPath>
+    <Reference Include="NetworkTables, Version=2016.0.1.16, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\FRC.NetworkTables.2016.0.1.16\lib\net45\NetworkTables.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -54,12 +54,12 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="WPILib, Version=2016.0.0.259, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FRC.WPILib.2016.0.0.259\lib\net45\WPILib.dll</HintPath>
+    <Reference Include="WPILib, Version=2016.0.2.45, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\FRC.WPILib.2016.0.2.45\lib\net45\WPILib.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="WPILib.Extras, Version=2016.0.0.259, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FRC.WPILib.Extras.2016.0.0.259\lib\net45\WPILib.Extras.dll</HintPath>
+    <Reference Include="WPILib.Extras, Version=2016.0.2.45, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\FRC.WPILib.Extras.2016.0.2.45\lib\net45\WPILib.Extras.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

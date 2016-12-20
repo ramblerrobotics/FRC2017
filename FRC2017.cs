@@ -36,7 +36,7 @@ namespace FRC2017
             
             //create joystick and robotdrive objects for joystick input and motor control
             stick = new Joystick(0);
-            drive = new RobotDrive(0, 1, 2, 3);
+            drive = new RobotDrive(1, 2, 3, 4);
         }
 
         // This autonomous (along with the sendable chooser above) shows how to select between
@@ -81,7 +81,7 @@ namespace FRC2017
             while(IsOperatorControl && IsEnabled)
             {
                 //utilize our drive class to call the ArcadeDrive method and accept input from the stick/joystick object
-                drive.ArcadeDrive(stick, true);
+                drive.TankDrive(-stick.GetRawAxis(1), stick.GetRawAxis(5));
                 //create a delay of .1 second
                 Timer.Delay(0.1);
             }
