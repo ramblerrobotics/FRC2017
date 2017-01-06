@@ -36,7 +36,7 @@ namespace FRC2017
             
             //create joystick and robotdrive objects for joystick input and motor control
             stick = new Joystick(0);
-            drive = new RobotDrive(1, 2, 3, 4);
+            drive = new RobotDrive(0, 1, 2, 3);
         }
 
         // This autonomous (along with the sendable chooser above) shows how to select between
