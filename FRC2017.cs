@@ -22,7 +22,8 @@ namespace FRC2017
 
         RobotDrive drive;
         Joystick stick;
-        
+        System.Timers.Timer time;
+        bool elapse;
         
         
         
@@ -55,6 +56,15 @@ namespace FRC2017
             autoSelected = (string)chooser.GetSelected();
             //autoSelected = SmartDashboard.GetString("Auto Selector", defaultAuto);
             Console.WriteLine("Auto selected: " + autoSelected);
+            time = new System.Timers.Timer(500);
+            time.AutoReset = false;
+            elapse = false;
+            time.Elapsed += TimeAlert;
+
+        }
+        private void TimeAlert(object source, System.Timers.ElapsedEventArgs e)
+        {
+            elapse = true;
         }
 
         /// <summary>
@@ -69,6 +79,11 @@ namespace FRC2017
                     break;
                 case defaultAuto:
                 default:
+                    if (!elapse)
+                    {
+                        time.Enabled = true;
+                        drive.ArcadeDrive(.1, 0);
+                    }
                     //Put default auto code here
                     break;
             }
