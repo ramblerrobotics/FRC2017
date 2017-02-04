@@ -17,15 +17,19 @@ namespace FRC2017
         const string customAuto = "My Auto";
         string autoSelected;
         SendableChooser chooser;
-
+        bool elapsed;
         
 
         RobotDrive drive;
         Joystick stick;
+        System.Timers.Timer clock;
         
         
         
-        
+        private void timerAlert(Object source, System.Timers.ElapsedEventArgs e)
+        {
+            elapsed = true;
+        }
         /// <summary>
         /// This function is run when the robot is first started up and should be
         /// used for any initialization code.
@@ -55,6 +59,10 @@ namespace FRC2017
             autoSelected = (string)chooser.GetSelected();
             //autoSelected = SmartDashboard.GetString("Auto Selector", defaultAuto);
             Console.WriteLine("Auto selected: " + autoSelected);
+            clock = new System.Timers.Timer(500);
+            clock.AutoReset = false;
+            elapsed = false;
+            clock.Elapsed += timerAlert;
         }
 
         /// <summary>
@@ -69,6 +77,11 @@ namespace FRC2017
                     break;
                 case defaultAuto:
                 default:
+                    if (!elapsed)
+                    {
+                        clock.Enabled = true;
+                        drive.ArcadeDrive(.1, 0);
+                    }
                     //Put default auto code here
                     break;
             }
