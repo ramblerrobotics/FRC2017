@@ -17,16 +17,18 @@ namespace FRC2017
         const string customAuto = "My Auto";
         string autoSelected;
         SendableChooser chooser;
-
-        
-
+        bool elapsed;
+        WPILib.CameraServer a;
+        WPILib.CameraServer b;
         RobotDrive drive;
         Joystick stick;
         System.Timers.Timer time;
         bool elapse;
         
-        
-        
+        private void timerAlert(Object source, System.Timers.ElapsedEventArgs e)
+        {
+            elapsed = true;
+        }
         /// <summary>
         /// This function is run when the robot is first started up and should be
         /// used for any initialization code.
@@ -37,7 +39,9 @@ namespace FRC2017
             chooser.AddDefault("Default Auto", defaultAuto);
             chooser.AddObject("My Auto", customAuto);
             SmartDashboard.PutData("Chooser", chooser);
-            
+            //start cameras?
+            a.StartAutomaticCapture();
+            b.StartAutomaticCapture();
             //create joystick and robotdrive objects for joystick input and motor control
             stick = new Joystick(0);
             drive = new RobotDrive(0, 1, 2, 3);
