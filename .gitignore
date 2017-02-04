@@ -8,6 +8,8 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 # User-specific files
+*.so
+*.so.*
 *.suo
 *.user
 *.userosscache
