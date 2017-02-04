@@ -25,7 +25,6 @@ namespace FRC2017
         System.Timers.Timer time;
         bool elapse;
         
-        
         private void timerAlert(Object source, System.Timers.ElapsedEventArgs e)
         {
             elapsed = true;
