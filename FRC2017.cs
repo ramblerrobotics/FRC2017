@@ -18,8 +18,8 @@ namespace FRC2017
         string autoSelected;
         SendableChooser chooser;
         bool elapsed;
-        
-
+        WPILib.CameraServer a;
+        WPILib.CameraServer b;
         RobotDrive drive;
         Joystick stick;
         System.Timers.Timer time;
@@ -40,7 +40,9 @@ namespace FRC2017
             chooser.AddDefault("Default Auto", defaultAuto);
             chooser.AddObject("My Auto", customAuto);
             SmartDashboard.PutData("Chooser", chooser);
-            
+            //start cameras?
+            a.StartAutomaticCapture();
+            b.StartAutomaticCapture();
             //create joystick and robotdrive objects for joystick input and motor control
             stick = new Joystick(0);
             drive = new RobotDrive(0, 1, 2, 3);
