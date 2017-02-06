@@ -18,17 +18,10 @@ namespace FRC2017
         string autoSelected;
         SendableChooser chooser;
         bool elapsed;
-        CameraServer a;
-        CameraServer b;
         RobotDrive drive;
         Joystick stick;
         System.Timers.Timer time;
-        bool elapse;
         
-        private void timerAlert(Object source, System.Timers.ElapsedEventArgs e)
-        {
-            elapsed = true;
-        }
         /// <summary>
         /// This function is run when the robot is first started up and should be
         /// used for any initialization code.
@@ -40,8 +33,8 @@ namespace FRC2017
             chooser.AddObject("My Auto", customAuto);
             SmartDashboard.PutData("Chooser", chooser);
             //start cameras?
-            a.StartAutomaticCapture();
-            b.StartAutomaticCapture();
+            CameraServer.Instance.StartAutomaticCapture(0);
+            CameraServer.Instance.StartAutomaticCapture(1);
             //create joystick and robotdrive objects for joystick input and motor control
             stick = new Joystick(0);
             drive = new RobotDrive(0, 1, 2, 3);
@@ -62,13 +55,13 @@ namespace FRC2017
             Console.WriteLine("Auto selected: " + autoSelected);
             time = new System.Timers.Timer(500);
             time.AutoReset = false;
-            elapse = false;
+            elapsed = false;
             time.Elapsed += TimeAlert;
 
         }
         private void TimeAlert(object source, System.Timers.ElapsedEventArgs e)
         {
-            elapse = true;
+            elapsed = true;
         }
 
         /// <summary>
@@ -83,10 +76,10 @@ namespace FRC2017
                     break;
                 case defaultAuto:
                 default:
-                    if (!elapse)
+                    if (!elapsed)
                     {
                         time.Enabled = true;
-                        drive.ArcadeDrive(.1, 0);
+                        drive.TankDrive(-.6, -.6);
                     }
                     //Put default auto code here
                     break;
@@ -110,7 +103,7 @@ namespace FRC2017
                 //we then pass these two doubles to the TankDrive method and voila, the robot drives.
 
                 double a = Math.Pow(stick.GetRawAxis(1), 3);
-                double b = Math.Pow(-stick.GetRawAxis(5), 3);
+                double b = Math.Pow(stick.GetRawAxis(5), 3);
                 drive.TankDrive(a, b);
                 //create a delay of .1 second
                 Timer.Delay(0.1);
