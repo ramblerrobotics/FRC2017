@@ -18,8 +18,8 @@ namespace FRC2017
         string autoSelected;
         SendableChooser chooser;
         bool elapsed;
-        WPILib.CameraServer a;
-        WPILib.CameraServer b;
+        CameraServer a;
+        CameraServer b;
         RobotDrive drive;
         Joystick stick;
         System.Timers.Timer time;
