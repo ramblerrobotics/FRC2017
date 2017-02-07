@@ -106,6 +106,7 @@ namespace FRC2017
                 double a = Math.Pow(stick.GetRawAxis(1), 3);
                 double b = Math.Pow(stick.GetRawAxis(5), 3);
                 drive.TankDrive(a, b);
+                //stick.GetRawButton(0) should be the "a" button
                 climber.SetSpeed(stick.GetRawButton(0) ? 1.0 : 0.0);
                 //create a delay of .1 second
                 Timer.Delay(0.1);
