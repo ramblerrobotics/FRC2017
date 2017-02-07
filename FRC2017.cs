@@ -21,7 +21,7 @@ namespace FRC2017
         RobotDrive drive;
         Joystick stick;
         System.Timers.Timer time;
-        
+        VictorSP climber;
         /// <summary>
         /// This function is run when the robot is first started up and should be
         /// used for any initialization code.
@@ -38,6 +38,7 @@ namespace FRC2017
             //create joystick and robotdrive objects for joystick input and motor control
             stick = new Joystick(0);
             drive = new RobotDrive(0, 1, 2, 3);
+            climber = new VictorSP(4);
         }
 
         // This autonomous (along with the sendable chooser above) shows how to select between
@@ -105,6 +106,7 @@ namespace FRC2017
                 double a = Math.Pow(stick.GetRawAxis(1), 3);
                 double b = Math.Pow(stick.GetRawAxis(5), 3);
                 drive.TankDrive(a, b);
+                climber.SetSpeed(stick.GetRawButton(0) ? 1.0 : 0.0);
                 //create a delay of .1 second
                 Timer.Delay(0.1);
             }
