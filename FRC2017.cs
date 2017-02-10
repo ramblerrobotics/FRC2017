@@ -105,13 +105,13 @@ namespace FRC2017
 
                 double a = Math.Pow(stick.GetRawAxis(1), 3);
                 double b = Math.Pow(stick.GetRawAxis(5), 3);
-                drive.TankDrive(a, b);
+                drive.TankDrive(b, a);
                 //stick.GetRawButton(0) should be the "a" button
                 //GetRawButton(1) should be "b"
                 double speed = 0.0;
-                speed += (stick.GetRawButton(0) ? 1.0 : 0.0);
                 speed += (stick.GetRawButton(1) ? 1.0 : 0.0);
-                climber.SetSpeed(speed);
+                speed += (stick.GetRawButton(2) ? 1.0 : 0.0);
+                climber.SetSpeed(-speed);
                 //create a delay of .1 second
                 Timer.Delay(0.1);
             }
