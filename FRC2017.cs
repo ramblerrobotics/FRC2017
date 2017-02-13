@@ -22,6 +22,8 @@ namespace FRC2017
         Joystick stick;
         System.Timers.Timer time;
         VictorSP climber;
+        char flag;
+        System.Timers.Timer testTime;
         /// <summary>
         /// This function is run when the robot is first started up and should be
         /// used for any initialization code.
@@ -39,6 +41,11 @@ namespace FRC2017
             stick = new Joystick(0);
             drive = new RobotDrive(0, 1, 2, 3);
             climber = new VictorSP(4);
+            flag = '\0';
+            testTime = new System.Timers.Timer(50);
+            elapsed = true;
+            testTime.AutoReset = false;
+            testTime.Elapsed += TimeAlert;
         }
 
         // This autonomous (along with the sendable chooser above) shows how to select between
@@ -64,7 +71,6 @@ namespace FRC2017
         {
             elapsed = true;
         }
-
         /// <summary>
         /// This function is called periodically during autonomous
         /// </summary>
@@ -109,8 +115,8 @@ namespace FRC2017
                 //stick.GetRawButton(0) should be the "a" button
                 //GetRawButton(1) should be "b"
                 double speed = 0.0;
-                speed += (stick.GetRawButton(1) ? 1.0 : 0.0);
-                speed += (stick.GetRawButton(2) ? 1.0 : 0.0);
+                speed += (stick.GetRawButton(1) ? 0.5 : 0.0);
+                speed += (stick.GetRawButton(2) ? 0.5 : 0.0);
                 climber.SetSpeed(-speed);
                 //create a delay of .1 second
                 Timer.Delay(0.1);
@@ -125,7 +131,65 @@ namespace FRC2017
         /// </summary>
         public override void TestPeriodic()
         {
+            if (elapsed)
+            {
+                if (stick.GetRawButton(1))
+                {
+                    Console.WriteLine('a');
+                    testTime.Stop();
+                    testTime.Start();
+                    flag = 'a';
+                    drive.TankDrive(-.6, -.6);
+                }
+                else if (stick.GetRawButton(2))
+                {
+                    Console.WriteLine('b');
+                    testTime.Stop();
+                    testTime.Start();
+                    flag = 'b';
+                    drive.TankDrive(.6, .6);
+                }
+                else if (stick.GetRawButton(3))
+                {
+                    Console.WriteLine('x');
+                    testTime.Stop();
+                    testTime.Start();
+                    flag = 'x';
+                    drive.TankDrive(.6, -.6);
+                }
+                else if (stick.GetRawButton(4))
+                {
+                    Console.WriteLine('y');
+                    testTime.Stop();
+                    testTime.Start();
+                    flag = 'y';
+                    drive.TankDrive(-.6, .6);
+                }
+                else
+                {
+                    drive.TankDrive(0f, 0f);
+                }
+            }
 
+            else
+            {
+                if (flag == 'a')
+                {
+                    drive.TankDrive(-.6, -.6);
+                }
+                else if(flag == 'b')
+                {
+                    drive.TankDrive(.6, .6);
+                }
+                else if(flag == 'x')
+                {
+                    drive.TankDrive(.6, -.6);
+                }
+                else if(flag == 'y')
+                {
+                    drive.TankDrive(-.6, .6);
+                }
+            }
         }
     }
 }
