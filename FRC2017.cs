@@ -115,8 +115,11 @@ namespace FRC2017
                 //stick.GetRawButton(0) should be the "a" button
                 //GetRawButton(1) should be "b"
                 double speed = 0.0;
-                speed += (stick.GetRawButton(1) ? 0.5 : 0.0);
-                speed += (stick.GetRawButton(2) ? 0.5 : 0.0);
+                if (stick.GetRawButton(8))
+                {
+                    speed += (stick.GetRawButton(1) ? 0.5 : 0.0);
+                    speed += (stick.GetRawButton(2) ? 0.5 : 0.0);
+                }
                 climber.SetSpeed(-speed);
                 //create a delay of .1 second
                 Timer.Delay(0.1);
