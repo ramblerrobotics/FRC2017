@@ -100,18 +100,30 @@ namespace FRC2017
         {
 
             //while teleop is enabled, and the drivestation is enabled, run this code
-            while(IsOperatorControl && IsEnabled)
+            while (IsOperatorControl && IsEnabled)
             {
 
-                //Cubing a decimal makes the decimal smaller, and the actual stick axis is a decimal between 0 and 1
+                //uble a = Math.Pow(stick.GetRawAxis(1), 7);
+                //uble b = Math.Pow(stick.GetRawAxis(5), 7);
 
-                //these two doubles named "a" and "b" cube the actual raw stick value, and will make the controls 
-                //much less sensitive, or at least until we test it, it should go from mach 8 to mach 2
-                //we then pass these two doubles to the TankDrive method and voila, the robot drives.
 
-                double a = Math.Pow(stick.GetRawAxis(1), 3);
-                double b = Math.Pow(stick.GetRawAxis(5), 3);
-                drive.TankDrive(b, a);
+                if (stick.GetRawButton(5))
+                {
+                    drive.TankDrive(stick.GetRawAxis(5), stick.GetRawAxis(1));
+                } else
+                {
+                    drive.TankDrive(stick.GetRawAxis(5) / 1.66666666, stick.GetRawAxis(1) / 1.66666666);
+
+                }
+
+                //ring console_b = System.Convert.ToString(b);
+                //ring console_a = System.Convert.ToString(a);
+
+                //artDashboard.PutString("DB/String 0", console_b);
+                //artDashboard.PutString("DB/string 1", console_a);
+
+
+
                 //stick.GetRawButton(0) should be the "a" button
                 //GetRawButton(1) should be "b"
                 double speed = 0.0;
