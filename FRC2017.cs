@@ -112,7 +112,13 @@ namespace FRC2017
                     drive.TankDrive(stick.GetRawAxis(5), stick.GetRawAxis(1));
                 } else
                 {
-                    drive.TankDrive(stick.GetRawAxis(5) / 1.66666666, stick.GetRawAxis(1) / 1.66666666);
+                    if (!stick.GetRawButton(6))
+                    {
+                        drive.TankDrive(stick.GetRawAxis(5) / 1.66666666, stick.GetRawAxis(1) / 1.66666666);
+                    }else
+                    {
+                        drive.TankDrive(-stick.GetRawAxis(1) / 1.66666666, -stick.GetRawAxis(5) / 1.66666666);
+                    }
 
                 }
 
