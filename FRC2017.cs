@@ -10,6 +10,7 @@ namespace FRC2017
     /// The VM is configured to automatically run this class, and to call the
     /// functions corresponding to each mode, as described in the IterativeRobot
     /// documentation. 
+
     /// </summary>
     public class FRC2017 : IterativeRobot
     {
@@ -100,18 +101,36 @@ namespace FRC2017
         {
 
             //while teleop is enabled, and the drivestation is enabled, run this code
-            while(IsOperatorControl && IsEnabled)
+
+            while (IsOperatorControl && IsEnabled)
             {
 
-                //Cubing a decimal makes the decimal smaller, and the actual stick axis is a decimal between 0 and 1
 
-                //these two doubles named "a" and "b" cube the actual raw stick value, and will make the controls 
-                //much less sensitive, or at least until we test it, it should go from mach 8 to mach 2
-                //we then pass these two doubles to the TankDrive method and voila, the robot drives.
 
-                double a = Math.Pow(stick.GetRawAxis(1), 3);
-                double b = Math.Pow(stick.GetRawAxis(5), 3);
-                drive.TankDrive(b, a);
+
+                if (stick.GetRawButton(5))
+                {
+                    drive.TankDrive(stick.GetRawAxis(5), stick.GetRawAxis(1));
+                } else
+                {
+                    if (!stick.GetRawButton(6))
+                    {
+                        drive.TankDrive(stick.GetRawAxis(5) / 1.66666666, stick.GetRawAxis(1) / 1.66666666);
+                    }else
+                    {
+                        drive.TankDrive(-stick.GetRawAxis(1) / 1.66666666, -stick.GetRawAxis(5) / 1.66666666);
+                    }
+
+                }
+
+                
+
+                SmartDashboard.PutNumber("DB/String 0", stick.GetRawAxis(5));
+                SmartDashboard.PutNumber("DB/String 1", stick.GetRawAxis(1));
+
+
+
+
                 //stick.GetRawButton(0) should be the "a" button
                 //GetRawButton(1) should be "b"
                 double speed = 0.0;
@@ -124,7 +143,7 @@ namespace FRC2017
                 //create a delay of .1 second
                 Timer.Delay(0.1);
             }
-           
+
         }
 
 
@@ -138,7 +157,8 @@ namespace FRC2017
             {
                 if (stick.GetRawButton(1))
                 {
-                    Console.WriteLine('a');
+                    SmartDashboard.PutString("DB/String 3", char.ToString('a'));
+                    //Console.WriteLine('a');
                     testTime.Stop();
                     testTime.Start();
                     flag = 'a';
@@ -146,7 +166,8 @@ namespace FRC2017
                 }
                 else if (stick.GetRawButton(2))
                 {
-                    Console.WriteLine('b');
+                    SmartDashboard.PutString("DB/String 4", char.ToString('b'));
+                    //Console.WriteLine('b');
                     testTime.Stop();
                     testTime.Start();
                     flag = 'b';
@@ -154,7 +175,8 @@ namespace FRC2017
                 }
                 else if (stick.GetRawButton(3))
                 {
-                    Console.WriteLine('x');
+                    SmartDashboard.PutString("DB/String 5", char.ToString('x'));
+                    //Console.WriteLine('x');
                     testTime.Stop();
                     testTime.Start();
                     flag = 'x';
@@ -162,7 +184,8 @@ namespace FRC2017
                 }
                 else if (stick.GetRawButton(4))
                 {
-                    Console.WriteLine('y');
+                    SmartDashboard.PutString("DB/String 6", char.ToString('y'));
+                    //Console.WriteLine('y');
                     testTime.Stop();
                     testTime.Start();
                     flag = 'y';
