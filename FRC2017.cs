@@ -9,7 +9,8 @@ namespace FRC2017
     /// <summary>
     /// The VM is configured to automatically run this class, and to call the
     /// functions corresponding to each mode, as described in the IterativeRobot
-    /// documentation.
+    /// documentation. 
+
     /// </summary>
     public class FRC2017 : IterativeRobot
     {
@@ -100,6 +101,7 @@ namespace FRC2017
         {
 
             //while teleop is enabled, and the drivestation is enabled, run this code
+
             while (IsOperatorControl && IsEnabled)
             {
 
