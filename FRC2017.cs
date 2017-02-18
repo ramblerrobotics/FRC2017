@@ -121,11 +121,10 @@ namespace FRC2017
 
                 }
 
-                string console_1 = System.Convert.ToString(stick.GetRawAxis(5));
-                string console_2 = System.Convert.ToString(stick.GetRawAxis(1));
+                
 
-                SmartDashboard.PutString("DB/String 0", console_1);
-                SmartDashboard.PutString("DB/String 1", console_2);
+                SmartDashboard.PutNumber("DB/String 0", stick.GetRawAxis(5));
+                SmartDashboard.PutNumber("DB/String 1", stick.GetRawAxis(1));
 
 
 
