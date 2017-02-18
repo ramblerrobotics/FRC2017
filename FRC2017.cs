@@ -157,7 +157,7 @@ namespace FRC2017
             {
                 if (stick.GetRawButton(1))
                 {
-                    SmartDashboard.PutString("DB/String 3", char.ToString('a'));
+                    SmartDashboard.PutString("DB/String 3", SmartDashboard.GetString("DB/String 3", "") + char.ToString('a'));
                     //Console.WriteLine('a');
                     testTime.Stop();
                     testTime.Start();
