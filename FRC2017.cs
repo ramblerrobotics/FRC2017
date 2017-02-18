@@ -104,8 +104,8 @@ namespace FRC2017
 
             while (IsOperatorControl && IsEnabled)
             {
-
-
+                //clear out values for new run
+                SmartDashboard.PutString("DB/String 3", "");
 
 
                 if (stick.GetRawButton(5))
@@ -166,7 +166,7 @@ namespace FRC2017
                 }
                 else if (stick.GetRawButton(2))
                 {
-                    SmartDashboard.PutString("DB/String 4", char.ToString('b'));
+                    SmartDashboard.PutString("DB/String 3", SmartDashboard.GetString("DB/String 3", "")+char.ToString('b'));
                     //Console.WriteLine('b');
                     testTime.Stop();
                     testTime.Start();
@@ -175,7 +175,7 @@ namespace FRC2017
                 }
                 else if (stick.GetRawButton(3))
                 {
-                    SmartDashboard.PutString("DB/String 5", char.ToString('x'));
+                    SmartDashboard.PutString("DB/String 3", SmartDashboard.GetString("DB/String 3", "") + char.ToString('x'));
                     //Console.WriteLine('x');
                     testTime.Stop();
                     testTime.Start();
@@ -184,7 +184,7 @@ namespace FRC2017
                 }
                 else if (stick.GetRawButton(4))
                 {
-                    SmartDashboard.PutString("DB/String 6", char.ToString('y'));
+                    SmartDashboard.PutString("DB/String 3", SmartDashboard.GetString("DB/String 3", "") + char.ToString('y'));
                     //Console.WriteLine('y');
                     testTime.Stop();
                     testTime.Start();
