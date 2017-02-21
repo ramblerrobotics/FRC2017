@@ -63,7 +63,7 @@ namespace FRC2017
         public override void AutonomousInit()
         {
             autoSelected = (string)chooser.GetSelected();
-            //autoSelected = SmartDashboard.GetString("Auto Selector", defaultAuto);
+            autoSelected = SmartDashboard.GetString("Auto Selector", defaultAuto);
             Console.WriteLine("Auto selected: " + autoSelected);
             time = new System.Timers.Timer(50);
             time.AutoReset = true;
