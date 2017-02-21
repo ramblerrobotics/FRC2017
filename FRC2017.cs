@@ -16,7 +16,7 @@ namespace FRC2017
     {
         const string defaultAuto = "Default";
         const string straightAuto = "Straight";
-        const string straight = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbxxxxxxxxxyyyyyyyyyyyyyyyyyxbbbbbbbbbb\0";
+        const string straight = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbyyyybbbbbbbbbbbbbbbbbbbbb\0";
         string autoSelected;
         SendableChooser chooser;
         bool elapsed;
