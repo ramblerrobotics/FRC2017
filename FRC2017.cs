@@ -15,7 +15,8 @@ namespace FRC2017
     public class FRC2017 : IterativeRobot
     {
         const string defaultAuto = "Default";
-        const string customAuto = "My Auto";
+        const string straightAuto = "Straight";
+        const string straight = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbxxxxxxxxxyyyyyyyyyyyyyyyyyxbbbbbbbbbb\0";
         string autoSelected;
         SendableChooser chooser;
         bool elapsed;
@@ -25,6 +26,7 @@ namespace FRC2017
         VictorSP climber;
         char flag;
         System.Timers.Timer testTime;
+        int elapsedTimes;
         /// <summary>
         /// This function is run when the robot is first started up and should be
         /// used for any initialization code.
@@ -33,7 +35,7 @@ namespace FRC2017
         {
             chooser = new SendableChooser();
             chooser.AddDefault("Default Auto", defaultAuto);
-            chooser.AddObject("My Auto", customAuto);
+            chooser.AddObject("My Auto", straightAuto);
             SmartDashboard.PutData("Chooser", chooser);
             //start cameras?
             CameraServer.Instance.StartAutomaticCapture(0);
@@ -45,6 +47,7 @@ namespace FRC2017
             flag = '\0';
             testTime = new System.Timers.Timer(50);
             elapsed = true;
+            elapsedTimes = 0;
             testTime.AutoReset = false;
             testTime.Elapsed += TimeAlert;
         }
@@ -62,32 +65,72 @@ namespace FRC2017
             autoSelected = (string)chooser.GetSelected();
             //autoSelected = SmartDashboard.GetString("Auto Selector", defaultAuto);
             Console.WriteLine("Auto selected: " + autoSelected);
-            time = new System.Timers.Timer(500);
-            time.AutoReset = false;
+            time = new System.Timers.Timer(50);
+            time.AutoReset = true;
             elapsed = false;
             time.Elapsed += TimeAlert;
-
+            time.Start();
         }
         private void TimeAlert(object source, System.Timers.ElapsedEventArgs e)
         {
             elapsed = true;
+            elapsedTimes++;
         }
         /// <summary>
         /// This function is called periodically during autonomous
         /// </summary>
         public override void AutonomousPeriodic()
         {
+            char letter;
             switch (autoSelected)
             {
-                case customAuto:
+                case straightAuto:
                     //Put custom auto code here
+                    letter = straight[elapsedTimes];
+                    if (letter == 'a')
+                    {
+                        drive.TankDrive(-.6, -.6);
+                    }
+                    else if (letter == 'b')
+                    {
+                        drive.TankDrive(.6, .6);
+                    }
+                    else if (letter == 'x')
+                    {
+                        drive.TankDrive(.6, -.6);
+                    }
+                    else if (letter == 'y')
+                    {
+                        drive.TankDrive(-.6, .6);
+                    }else if (letter=='\0')
+                    {
+                        time.Stop();
+                        drive.TankDrive(0f, 0f);
+                    }
                     break;
                 case defaultAuto:
                 default:
-                    if (!elapsed)
+                    letter = straight[elapsedTimes];
+                    if (letter == 'a')
                     {
-                        time.Enabled = true;
                         drive.TankDrive(-.6, -.6);
+                    }
+                    else if (letter == 'b')
+                    {
+                        drive.TankDrive(.6, .6);
+                    }
+                    else if (letter == 'x')
+                    {
+                        drive.TankDrive(.6, -.6);
+                    }
+                    else if (letter == 'y')
+                    {
+                        drive.TankDrive(-.6, .6);
+                    }
+                    else if (letter == '\0')
+                    {
+                        time.Stop();
+                        drive.TankDrive(0f, 0f);
                     }
                     //Put default auto code here
                     break;
@@ -153,6 +196,8 @@ namespace FRC2017
         /// </summary>
         public override void TestPeriodic()
         {
+            time.Stop();
+            elapsedTimes = 0;
             if (elapsed)
             {
                 if (stick.GetRawButton(1))
