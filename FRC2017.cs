@@ -24,6 +24,7 @@ namespace FRC2017
         Joystick stick;
         System.Timers.Timer time;
         VictorSP climber;
+        VictorSP getRope;
         char flag;
         System.Timers.Timer testTime;
         int elapsedTimes;
@@ -44,6 +45,7 @@ namespace FRC2017
             stick = new Joystick(0);
             drive = new RobotDrive(0, 1, 2, 3);
             climber = new VictorSP(4);
+            getRope = new VictorSP(5);
             flag = '\0';
             testTime = new System.Timers.Timer(50);
             elapsed = true;
@@ -183,6 +185,8 @@ namespace FRC2017
                     speed += (stick.GetRawButton(2) ? 0.5 : 0.0);
                 }
                 climber.SetSpeed(-speed);
+
+                getRope.SetSpeed(stick.GetRawAxis(2) - stick.GetRawAxis(3));
                 //create a delay of .1 second
                 Timer.Delay(0.1);
             }
