@@ -16,7 +16,8 @@ namespace FRC2017
     {
         const string defaultAuto = "Default";
         const string straightAuto = "Straight";
-        const string straight = "bbbbbbbbyybbbbbbbbyybbbbbbbbyybbbbbbbbbbyybbbbbbbbyybbbbbbbbyybb\0"; 
+        const string straight = "bbbbbbbbyybbbbbbbbyybbbbbbbbyybbbbbbbbbbyybbbbbbbbyybbbbbbbbyybb\0";
+        const string leftAuto = "";
         string autoSelected;
         SendableChooser chooser;
         bool elapsed;
@@ -37,6 +38,7 @@ namespace FRC2017
             chooser = new SendableChooser();
             chooser.AddDefault("Default Auto", defaultAuto);
             chooser.AddObject("My Auto", straightAuto);
+            chooser.AddObject("Left Auto", leftAuto);
             SmartDashboard.PutData("Chooser", chooser);
             //start cameras?
             CameraServer.Instance.StartAutomaticCapture(0);
@@ -120,7 +122,33 @@ namespace FRC2017
                     }
                     break;
                 case defaultAuto:
+               
                 default:
+                    letter = straight[elapsedTimes];
+                    if (letter == 'a')
+                    {
+                        drive.TankDrive(-.7, -.7);
+                    }
+                    else if (letter == 'b')
+                    {
+                        drive.TankDrive(.7, .7);
+                    }
+                    else if (letter == 'x')
+                    {
+                        drive.TankDrive(.7, -.7);
+                    }
+                    else if (letter == 'y')
+                    {
+                        drive.TankDrive(-.7, .7);
+                    }
+                    else if (letter == '\0')
+                    {
+                        time.Stop();
+                        drive.TankDrive(0f, 0f);
+                    }
+                    break;
+
+                case leftAuto:
                     letter = straight[elapsedTimes];
                     if (letter == 'a')
                     {
