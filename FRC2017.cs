@@ -16,7 +16,7 @@ namespace FRC2017
     {
         const string defaultAuto = "Default";
         const string straightAuto = "Straight";
-        const string straight = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbyyyybbbbbbbbbbbbbbbbbbbbb\0";
+        const string straight = "bbbbbbbbyybbbbbbbbyybbbbbbbbyybbbbbbbbbbyybbbbbbbbyybbbbbbbbyybb\0"; 
         string autoSelected;
         SendableChooser chooser;
         bool elapsed;
@@ -72,6 +72,15 @@ namespace FRC2017
             elapsed = false;
             time.Elapsed += TimeAlert;
             time.Start();
+
+           /* WPILib.Buttons.InternalButton button = new WPILib.Buttons.InternalButton();
+            if (button.Get())
+            {
+                char AutoMode = 'a';
+                //a = left
+                //b = mid
+                //c = right;
+            } */
         }
         private void TimeAlert(object source, System.Timers.ElapsedEventArgs e)
         {
@@ -91,19 +100,19 @@ namespace FRC2017
                     letter = straight[elapsedTimes];
                     if (letter == 'a')
                     {
-                        drive.TankDrive(-.6, -.6);
+                        drive.TankDrive(-.7, -.7);
                     }
                     else if (letter == 'b')
                     {
-                        drive.TankDrive(.6, .6);
+                        drive.TankDrive(.7, .7);
                     }
                     else if (letter == 'x')
                     {
-                        drive.TankDrive(.6, -.6);
+                        drive.TankDrive(.7, -.7);
                     }
                     else if (letter == 'y')
                     {
-                        drive.TankDrive(-.6, .6);
+                        drive.TankDrive(-.7, .7);
                     }else if (letter=='\0')
                     {
                         time.Stop();
@@ -115,19 +124,19 @@ namespace FRC2017
                     letter = straight[elapsedTimes];
                     if (letter == 'a')
                     {
-                        drive.TankDrive(-.6, -.6);
+                        drive.TankDrive(-.7, -.7);
                     }
                     else if (letter == 'b')
                     {
-                        drive.TankDrive(.6, .6);
+                        drive.TankDrive(.7, .7);
                     }
                     else if (letter == 'x')
                     {
-                        drive.TankDrive(.6, -.6);
+                        drive.TankDrive(.7, -.7);
                     }
                     else if (letter == 'y')
                     {
-                        drive.TankDrive(-.6, .6);
+                        drive.TankDrive(-.7, .7);
                     }
                     else if (letter == '\0')
                     {
@@ -160,10 +169,10 @@ namespace FRC2017
                 {
                     if (!stick.GetRawButton(6))
                     {
-                        drive.TankDrive(stick.GetRawAxis(5) / 1.66666666, stick.GetRawAxis(1) / 1.66666666);
+                        drive.TankDrive(stick.GetRawAxis(5) / 1.3, stick.GetRawAxis(1) / 1.3);
                     }else
                     {
-                        drive.TankDrive(-stick.GetRawAxis(1) / 1.66666666, -stick.GetRawAxis(5) / 1.66666666);
+                        drive.TankDrive(-stick.GetRawAxis(1) / 1.3, -stick.GetRawAxis(5) / 1.3);
                     }
 
                 }
@@ -179,14 +188,18 @@ namespace FRC2017
                 //stick.GetRawButton(0) should be the "a" button
                 //GetRawButton(1) should be "b"
                 double speed = 0.0;
-                if (stick.GetRawButton(8))
+                // if (stick.GetRawButton(8))
+                //{
+
+                if (stick.GetRawButton(1) || stick.GetRawButton(2))
                 {
                     speed += (stick.GetRawButton(1) ? 0.5 : 0.0);
                     speed += (stick.GetRawButton(2) ? 0.5 : 0.0);
                 }
+                //}
                 climber.SetSpeed(-speed);
 
-                getRope.SetSpeed(stick.GetRawAxis(2) - stick.GetRawAxis(3));
+                getRope.SetSpeed(stick.GetRawAxis(2)/2 - stick.GetRawAxis(3)/2);
                 //create a delay of .1 second
                 Timer.Delay(0.1);
             }
@@ -256,6 +269,7 @@ namespace FRC2017
                 {
                     drive.TankDrive(.6, .6);
                 }
+
                 else if(flag == 'x')
                 {
                     drive.TankDrive(.6, -.6);
